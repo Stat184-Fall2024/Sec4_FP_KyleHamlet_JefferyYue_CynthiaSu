@@ -19,5 +19,3 @@ Ageast = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
 Agemp = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgmp = mean(MP))
 
-hi
-
