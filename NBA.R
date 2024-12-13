@@ -18,4 +18,20 @@ Ageast = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgast = mean(AST))
 Agemp = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgmp = mean(MP))
+Ageorb = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgorb = mean(ORB))
+Agedrb = NBAplayers %>% group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgdrb = mean(DRB))
+Agestl = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgstl = mean(STL))
+Ageblk = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgblk = mean(BLK))
+Agetov = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgtov = mean(TOV))
+Agepf = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgpf = mean(PF))
+Agepts = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgpts = mean(PTS))
+
+Agestat = data.frame()
 
