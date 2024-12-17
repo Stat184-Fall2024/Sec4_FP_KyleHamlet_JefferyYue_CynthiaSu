@@ -29,3 +29,20 @@ Agemp[-c(1)],Ageorb[-c(1)],Agedrb[-c(1)],Agestl[-c(1)],
 Ageblk[-c(1)],Agetov[-c(1)])
 View(Agestat)
 
+
+
+
+NBAplayers2 = NBAplayers[-c(1,3,4,5,6,7,8,9,10,11,12,13,15,16,
+                  17,18,19,20,22,23,24,25,26,27,28,29,30,31)]
+NBAplayers2 = na.omit(NBAplayers2)
+NBAplayers22 = as.numeric(unlist(NBAplayers2[2]))
+NBAplayers23 = as.numeric(unlist(NBAplayers2[3]))
+NBAplayers21 = data.frame(NBAplayers2[1],NBAplayers22,NBAplayers23)
+View(NBAplayers22)
+Thrperc = NBAplayers21 %>% group_by(Player) %>%
+  summarise(Thrperc = mean(NBAplayers22))
+FTperc = NBAplayers21 %>% group_by(Player) %>%
+  summarise(FTperc = mean(NBAplayers23))
+View(Thrperc)
+View(FTperc)
+
