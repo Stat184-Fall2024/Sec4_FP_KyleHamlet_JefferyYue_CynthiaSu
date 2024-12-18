@@ -4,23 +4,61 @@ format: pdf
 editor: visual
 ---
 
-## Quarto
+## Research Question 1: Is a player’s 3-point shooting percentage related to free throw shooting percentage?
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Load Package
 
 ```{r}
-1 + 1
+
+library(tidyverse)
+
 ```
 
-You can add options to executable code like this
+## Data Loading & Preprocessing
 
 ```{r}
-#| echo: false
-2 * 2
+player_data <- read.csv("NBA Players 1999-2023 - Sheet1.csv")
+
+player_data
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+```{r}
+
+cleaned_data <- player_data %>%
+  select(`Player`,`X3P.`, `FT.`) %>%
+  rename(player_name = `Player`,three_point_pct = `X3P.`, free_throw_pct = `FT.`) %>%
+  drop_na()
+
+cleaned_data
+```
+
+## Data Exploration
+
+```{r}
+ggplot(cleaned_data, aes(x = free_throw_pct, y = three_point_pct)) +
+  geom_point(alpha = 0.7) +
+  labs(
+    title = "Scatter Plot of 3-Point Percentage vs Free Throw Percentage",
+    x = "Free Throw Percentage",
+    y = "3-Point Percentage"
+  ) +
+  theme_minimal()
+```
+
+## Correlation Test
+
+```{r}
+correlation <- cor.test(cleaned_data$three_point_pct, cleaned_data$free_throw_pct, method = "pearson")
+
+correlation
+
+```
+
+```{r}
+if (correlation$p.value < 0.05) {
+  cat("Found significant correlation between 3-point shooting percentage and free throw shooting percentage (r =", round(correlation$estimate, 2), ").")
+} else {
+  cat("Found no significant correlation between 3-point shooting percentage and free throw shooting percentage.")
+}
+
+```
