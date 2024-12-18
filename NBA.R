@@ -29,7 +29,24 @@ Agemp[-c(1)],Ageorb[-c(1)],Agedrb[-c(1)],Agestl[-c(1)],
 Ageblk[-c(1)],Agetov[-c(1)])
 View(Agestat)
 
+ggplot(
+  data = Agestat,
+  aes(x=Age..,y=Avgppg,fill=Age..)
+) + geom_bar(stat = "identity", width = 0.5) +
+labs(x = "Player Age",y = "Average Points Per Game", 
+title = "Average Points Scored at Different Ages in the NBA")
+  
+ggplot(data = Agestat,
+       aes(x=Age..,y=Avgast,fill=Age..)
+) + geom_bar(stat = "identity", width = 0.5) + 
+  labs(x = "Player Age", y = "Average Assists Per Game",
+       title = "Average Assists Made at Different Ages in the NBA")
 
+ggplot(data = Agestat,
+       aes(x=Age..,y=(Avgorb+Avgdrb),fill=Age..)
+) + geom_bar(stat = "identity", width = 0.5) + 
+  labs(x = "Player Age", y = "Average Rebounds Per Game",
+       title = "Average Rebounds at Different Ages in the NBA")
 
 
 NBAplayers2 = NBAplayers[-c(1,3,4,5,6,7,8,9,10,11,12,13,15,16,
