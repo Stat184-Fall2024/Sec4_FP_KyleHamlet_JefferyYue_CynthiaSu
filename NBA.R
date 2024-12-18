@@ -140,3 +140,50 @@ ggplot(
        title = "Correlation Between Win Rate and Points Allowed")+
   theme_bw() + stat_smooth(method = "lm",
                            formula = y ~ x)
+
+## Data Loading & Preprocessing
+
+
+player_data <- read.csv("NBA Players 1999-2023 - Sheet1.csv")
+
+player_data
+
+
+
+
+cleaned_data <- player_data %>%
+  select(`Player`,`X3P.`, `FT.`) %>%
+  rename(player_name = `Player`,three_point_pct = `X3P.`, free_throw_pct = `FT.`) %>%
+  drop_na()
+
+cleaned_data
+
+
+## Data Exploration
+
+
+ggplot(cleaned_data, aes(x = free_throw_pct, y = three_point_pct)) +
+  geom_point(alpha = 0.7) +
+  labs(
+    title = "Scatter Plot of 3-Point Percentage vs Free Throw Percentage",
+    x = "Free Throw Percentage",
+    y = "3-Point Percentage"
+  ) +
+  theme_minimal()
+
+
+## Correlation Test
+
+
+correlation <- cor.test(cleaned_data$three_point_pct, cleaned_data$free_throw_pct, method = "pearson")
+
+correlation
+
+
+if (correlation$p.value < 0.05) {
+  cat("Found significant correlation between 3-point shooting percentage and free throw shooting percentage (r =", round(correlation$estimate, 2), ").")
+} else {
+  cat("Found no significant correlation between 3-point shooting percentage and free throw shooting percentage.")
+}
+
+
