@@ -4,9 +4,9 @@ library(dplyr)
 library(ggplot2)
 NBAplayers = read_sheet("https://docs.google.com/spreadsheets/d/1eJ5BV-S4vy0DPsrENh_L-Q9VYgwmnTQiOeSHWawqNhc/edit?gid=0#gid=0")
 NBAteams = read_sheet("https://docs.google.com/spreadsheets/d/1lHVKe28VY8DfM-UaQNchnHNAeOHTo9jSMybWMEoEVJk/edit?gid=0#gid=0")
-View(NBAplayers)
+NBAteamsA = read_sheet("https://docs.google.com/spreadsheets/d/16NtmTCNBOD-YhLRmO-UwxQpLfMBZkwUNCwGqwKrHqqk/edit?gid=0#gid=0")
+View(NBAteamsA)
 NBAplayers3 = NBAplayers[-c(1,4,5,9,10,11,12,13,14,15,16,17,18,19,20,21,24,29)]
-View(NBAplayers3)
 Ageppg = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgppg = mean(PTS))
 Ageast = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
@@ -64,7 +64,8 @@ Shotcomp = data.frame(Thrperc,FTperc[-c(1)])
 View(Shotcomp)
 ggplot(
   data = Shotcomp, 
-  aes(x=as.numeric(unlist(Shotcomp[3])),y=as.numeric(unlist(Shotcomp[2])))) +  
+  aes(x=as.numeric(unlist(Shotcomp[3])),y=as.numeric(unlist(Shotcomp[2])))
+  ) +  
     geom_point() + 
     labs(x = "% of Free Throws Made", 
          y = "% of 3s Made", 
@@ -72,3 +73,29 @@ ggplot(
     theme_bw() + stat_smooth(method = "lm", 
                              formula = y ~ x)
 
+
+WinRate = (NBAteamsA[4]/(NBAteamsA[5]+NBAteamsA[4]))
+WinRateComp = data.frame(NBAteamsA[2],WinRate,NBAteamsA[6],NBAteamsA[7],NBAteamsA[16])
+View(WinRateComp)
+
+ggplot(
+  data = WinRateComp,
+  aes(x=as.numeric(unlist(WinRateComp[3])),y=as.numeric(unlist(WinRateComp[2])))
+) +
+  geom_point() + 
+  labs(x = "Points Scored(Per 100 Possessions)",
+       y = "Win Rate",
+       title = "Correlation Between Win Rate and Points Scored")+
+ theme_bw() + stat_smooth(method = "lm",
+                          formula = y ~ x)
+
+ggplot(
+  data = WinRateComp,
+  aes(x=as.numeric(unlist(WinRateComp[4])),y=as.numeric(unlist(WinRateComp[2])))
+) +
+  geom_point() + 
+  labs(x = "Points Allowed(Per 100 Possessions)",
+       y = "Win Rate",
+       title = "Correlation Between Win Rate and Points Allowed")+
+  theme_bw() + stat_smooth(method = "lm",
+                           formula = y ~ x)
