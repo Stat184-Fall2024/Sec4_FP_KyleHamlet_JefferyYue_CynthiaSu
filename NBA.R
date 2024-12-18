@@ -1,12 +1,11 @@
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
-#NBAplayers = read_sheet("https://docs.google.com/spreadsheets/d/1eJ5BV-S4vy0DPsrENh_L-Q9VYgwmnTQiOeSHWawqNhc/edit?gid=0#gid=0")
+
 NBAplaters = read.csv("NBA Players 1999-2023 - Sheet1.csv")
-#NBAteams = read_sheet("https://docs.google.com/spreadsheets/d/1lHVKe28VY8DfM-UaQNchnHNAeOHTo9jSMybWMEoEVJk/edit?gid=0#gid=0")
 NBAteams = read.csv("NBA Teams 1999-2023 - Sheet1.csv")
-#NBAteamsA = read_sheet("https://docs.google.com/spreadsheets/d/16NtmTCNBOD-YhLRmO-UwxQpLfMBZkwUNCwGqwKrHqqk/edit?gid=0#gid=0")
 NBAteamsA = read.csv("NBA Teams ADvanced 1999-2023 - Sheet1.csv")
+
 View(NBAteamsA)
 NBAplayers3 = NBAplayers[-c(1,4,5,9,10,11,12,13,14,15,16,17,18,19,20,21,24,29)]
 Ageppg = NBAplayers3 %>% group_by(NBAplayers3[c(2)]) %>%
