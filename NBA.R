@@ -1,54 +1,54 @@
-#load libraries
+#Load libraries
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
 
-#read csv files
+#Read csv files
 NBAplayers = read.csv("NBA Players 1999-2023 - Sheet1.csv")
 NBAteams = read.csv("NBA Teams 1999-2023 - Sheet1.csv")
 NBAteamsA = read.csv("NBA Teams ADvanced 1999-2023 - Sheet1.csv")
 
 View(NBAteamsA)
 NBAplayers3 <- NBAplayers %>%
-  # Drop unnecessary columns
+  #Drop unnecessary columns
   select(-c(1, 4, 5, 9:21, 24, 29))
 
-# Avg points per game
+#Avg points per game
 Ageppg <- NBAplayers3 %>%
   group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgppg = mean(PTS, na.rm = TRUE))
 
-# Avg Assists Per Game
+#Avg Assists Per Game
 Ageast <- NBAplayers3 %>%
   group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgast = mean(AST, na.rm = TRUE))
 
-# Avg Minutes Per Game
+#Avg Minutes Per Game
 Agemp <- NBAplayers3 %>%
   group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgmp = mean(MP, na.rm = TRUE))
 
-# Avg Offensive Rebounds
+#Avg Offensive Rebounds
 Ageorb <- NBAplayers3 %>%
   group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgorb = mean(ORB, na.rm = TRUE))
 
-# Avg Defensive Rebounds
+#Avg Defensive Rebounds
 Agedrb <- NBAplayers3 %>%
   group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgdrb = mean(DRB, na.rm = TRUE))
 
-# Avg Steals
+#Avg Steals
 Agestl <- NBAplayers3 %>%
   group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgstl = mean(STL, na.rm = TRUE))
 
-# Avg Blocks
+#Avg Blocks
 Ageblk <- NBAplayers3 %>%
   group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgblk = mean(BLK, na.rm = TRUE))
 
-# Avg Turnovers
+#Avg Turnovers
 Agetov <- NBAplayers3 %>%
   group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgtov = mean(TOV, na.rm = TRUE))
@@ -86,7 +86,7 @@ geom_smooth(aes(group = 1, y = (Avgorb + Avgdrb)), method = "lm", se = TRUE, col
 
 
 NBAplayers2 <- NBAplayers %>%
-  # Drop unnecessary columns
+  #Drop unnecessary columns
   select(-c(1, 3:13, 15:20, 22:31))
 NBAplayers2 = na.omit(NBAplayers2)
 NBAplayers22 = as.numeric(unlist(NBAplayers2[2]))
