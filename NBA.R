@@ -2,7 +2,7 @@ library(tidyverse)
 library(dplyr)
 library(ggplot2)
 
-NBAplaters = read.csv("NBA Players 1999-2023 - Sheet1.csv")
+NBAplayers = read.csv("NBA Players 1999-2023 - Sheet1.csv")
 NBAteams = read.csv("NBA Teams 1999-2023 - Sheet1.csv")
 NBAteamsA = read.csv("NBA Teams ADvanced 1999-2023 - Sheet1.csv")
 
