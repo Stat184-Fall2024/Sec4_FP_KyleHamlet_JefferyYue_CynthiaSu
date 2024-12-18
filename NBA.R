@@ -38,11 +38,20 @@ NBAplayers2 = na.omit(NBAplayers2)
 NBAplayers22 = as.numeric(unlist(NBAplayers2[2]))
 NBAplayers23 = as.numeric(unlist(NBAplayers2[3]))
 NBAplayers21 = data.frame(NBAplayers2[1],NBAplayers22,NBAplayers23)
-View(NBAplayers22)
 Thrperc = NBAplayers21 %>% group_by(Player) %>%
   summarise(Thrperc = mean(NBAplayers22))
 FTperc = NBAplayers21 %>% group_by(Player) %>%
   summarise(FTperc = mean(NBAplayers23))
-View(Thrperc)
-View(FTperc)
+
+Shotcomp = data.frame(Thrperc,FTperc[-c(1)])
+View(Shotcomp)
+ggplot(
+  data = Shotcomp, 
+  aes(x=as.numeric(unlist(Shotcomp[3])),y=as.numeric(unlist(Shotcomp[2])))) +  
+    geom_point() + 
+    labs(x = "% of Free Throws Made", 
+         y = "% of 3s Made", 
+         title = "Free Throw% Compared to 3 Point% in NBA Players") +
+    theme_bw() + stat_smooth(method = "lm", 
+                             formula = y ~ x)
 
