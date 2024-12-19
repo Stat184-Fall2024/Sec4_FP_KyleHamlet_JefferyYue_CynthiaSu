@@ -122,21 +122,16 @@ Similarly to the first research question the data was taken from NBA player stat
 ### Data Visualization
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
-
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
-
 ```
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
-
 NBAplayers = read.csv("NBA Players 1999-2023 - Sheet1.csv")
-
 ```
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
-
 NBAplayers3 <- NBAplayers %>%
   #Drop unnecessary columns
   select(-c(1, 4, 5, 9:21, 24, 29))
@@ -160,15 +155,12 @@ Ageorb <- NBAplayers3 %>%
 Agedrb <- NBAplayers3 %>%
   group_by(NBAplayers3[c(2)]) %>%
   summarise(Avgdrb = mean(DRB, na.rm = TRUE))
-
 ```
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
-
 #Agestat dataframe
 Agestat = data.frame(Ageppg,Ageast[-c(1)],
 Ageorb[-c(1)],Agedrb[-c(1)])
-
 ```
 
 #### Player Age VS Average Points Per Game
@@ -180,7 +172,6 @@ ggplot(
 ) + geom_bar(stat = "identity", width = 0.5) +
 labs(x = "Player Age",y = "Average Points Per Game", 
 title = "Average Points Scored at Different Ages in the NBA")
-
 ```
 
 This figure shows negative concavity. It also shows that even with generally negative concavity, there was a spike in average points per game for the age 44.
@@ -193,7 +184,6 @@ ggplot(data = Agestat,
 ) + geom_bar(stat = "identity", width = 0.5) + 
   labs(x = "Player Age", y = "Average Assists Per Game",
        title = "Average Assists Made at Different Ages in the NBA")
-
 ```
 
 This figure has a more aggressive negative concave to it. Like previously we see that at age 44 there is a large spike in average assists per game.
@@ -206,7 +196,6 @@ ggplot(data = Agestat,
 ) + geom_bar(stat = "identity", width = 0.5) + 
   labs(x = "Player Age", y = "Average Rebounds Per Game",
        title = "Average Rebounds at Different Ages in the NBA")
-
 ```
 
 This figure like the others has negative concavity as well.
