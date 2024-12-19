@@ -187,6 +187,7 @@ View(Agestat)
 #### Player Age VS Average Points Per Game
 
 ```{r}
+#| label: fig-pl-ppg
 
 ggplot(
   data = Agestat,
@@ -200,6 +201,7 @@ title = "Average Points Scored at Different Ages in the NBA")
 #### Player Age VS Average Assists Per Game
 
 ```{r}
+#| label: fig-pl-ast
 
 ggplot(data = Agestat,
        aes(x=Age..,y=Avgast,fill=Age..)
@@ -212,6 +214,7 @@ ggplot(data = Agestat,
 #### Player Age VS Average Rebounds Per Game
 
 ```{r}
+#| label: fig-pl-rpg
 
 ggplot(data = Agestat,
        aes(x=Age..,y=(Avgorb+Avgdrb),fill=Age..)
@@ -221,7 +224,21 @@ ggplot(data = Agestat,
 
 ```
 
+[@fig-pl-ppg]
 
+This figure shows negative concavity. It also shows that even with generally negative concavity, there was a spike in average points per game for the ages: 18, 39, 40, 42, and 44.
+
+[@fig-pl-ast]
+
+This figure has a more aggresive negative concave to it. Like previously we see that at age 39 and 44 there is a large spike in average assists per game.
+
+[@fig-pl-rpg]
+
+This figure like the others has negative concavity as well. Also like the previous figures there is a spike in average rebounds per game for the ages: 42 and 44.
+
+### Result Analysis
+
+From looking at the above visuals we can conclude that generally speaking players in their mid 20's to mid 30's perform the best in all 3 aspects. We can see there are some outliers amongst all 3 visuals occuring at the age 39 and higher. Due to the negative concavity, we can conclude that the general body of players start out with lower stats, progress to peak throughout the middle of their career, then decrease in performance as they are about to retire.
 
 ### Appendix
 
@@ -293,7 +310,6 @@ ggplot(
   data = Agestat,
   aes(x=Age..,y=Avgppg,fill=Age..)
 ) + geom_bar(stat = "identity", width = 0.5) +
-geom_smooth(aes(group = 1), method = "lm", se = TRUE, color = "blue") +
 labs(x = "Player Age",y = "Average Points Per Game", 
 title = "Average Points Scored at Different Ages in the NBA")
 
@@ -301,7 +317,6 @@ title = "Average Points Scored at Different Ages in the NBA")
 ggplot(data = Agestat,
        aes(x=Age..,y=Avgast,fill=Age..)
 ) + geom_bar(stat = "identity", width = 0.5) + 
-geom_smooth(aes(group = 1), method = "lm", se = TRUE, color = "blue") +
   labs(x = "Player Age", y = "Average Assists Per Game",
        title = "Average Assists Made at Different Ages in the NBA")
 
@@ -309,7 +324,6 @@ geom_smooth(aes(group = 1), method = "lm", se = TRUE, color = "blue") +
 ggplot(data = Agestat,
        aes(x=Age..,y=(Avgorb+Avgdrb),fill=Age..)
 ) + geom_bar(stat = "identity", width = 0.5) + 
-geom_smooth(aes(group = 1, y = (Avgorb + Avgdrb)), method = "lm", se = TRUE, color = "blue") +
   labs(x = "Player Age", y = "Average Rebounds Per Game",
        title = "Average Rebounds at Different Ages in the NBA")
 
