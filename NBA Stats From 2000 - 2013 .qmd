@@ -240,6 +240,11 @@ This figure like the others has negative concavity as well. Also like the previo
 
 From looking at the above visuals we can conclude that generally speaking players in their mid 20's to mid 30's perform the best in all 3 aspects. We can see there are some outliers amongst all 3 visuals occuring at the age 39 and higher. Due to the negative concavity, we can conclude that the general body of players start out with lower stats, progress to peak throughout the middle of their career, then decrease in performance as they are about to retire.
 
+
+
+
+
+
 ### Appendix
 
 ```{r, codeAppend,ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
