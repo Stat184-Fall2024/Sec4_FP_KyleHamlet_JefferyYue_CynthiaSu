@@ -171,8 +171,6 @@ Agedrb <- NBAplayers3 %>%
 Agestat = data.frame(Ageppg,Ageast[-c(1)],
 Ageorb[-c(1)],Agedrb[-c(1)])
 
-View(Agestat)
-
 ```
 
 ### Data Visualization
