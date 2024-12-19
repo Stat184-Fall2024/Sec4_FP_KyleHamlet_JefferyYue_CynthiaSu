@@ -142,14 +142,8 @@ ggplot(
                            formula = y ~ x)
 
 ## Data Loading & Preprocessing
-
-
 player_data <- read.csv("NBA Players 1999-2023 - Sheet1.csv")
-
 player_data
-
-
-
 
 cleaned_data <- player_data %>%
   select(`Player`,`X3P.`, `FT.`) %>%
@@ -158,10 +152,8 @@ cleaned_data <- player_data %>%
 
 cleaned_data
 
-
 ## Data Exploration
-
-
+#Visual 7
 ggplot(cleaned_data, aes(x = free_throw_pct, y = three_point_pct)) +
   geom_point(alpha = 0.7) +
   labs(
@@ -173,12 +165,9 @@ ggplot(cleaned_data, aes(x = free_throw_pct, y = three_point_pct)) +
 
 
 ## Correlation Test
-
-
 correlation <- cor.test(cleaned_data$three_point_pct, cleaned_data$free_throw_pct, method = "pearson")
 
 correlation
-
 
 if (correlation$p.value < 0.05) {
   cat("Found significant correlation between 3-point shooting percentage and free throw shooting percentage (r =", round(correlation$estimate, 2), ").")
