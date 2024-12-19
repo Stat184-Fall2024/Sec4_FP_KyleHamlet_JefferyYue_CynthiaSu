@@ -22,7 +22,7 @@ The data meets the FAIR principles:
 
 -   Reusable: The dataset has vary variables from multiple years, and it's convinient to do different analyses.
 
-Our research research about the correlation between the 3-point goal percentage (3P%) and free throw goal percentage (FT%). These two attributes are part of dataset.
+We will be researching about the correlation between the 3-point goal percentage (3P%) and free throw goal percentage (FT%). These two attributes are part of dataset.
 
 ### Data Visualization
 
