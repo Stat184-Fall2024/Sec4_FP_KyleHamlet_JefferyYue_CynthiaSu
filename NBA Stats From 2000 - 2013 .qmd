@@ -126,7 +126,7 @@ This research question examines the correlation between a player's age and their
 
 Similarly to the first research question the data was taken from NBA player statistics from 1999 to 2023 from the NBA website. As stated above, the data meets the FAIR principles.
 
-### Load Package
+### Data Loading & Preprocessing
 
 ```{r}
 
@@ -135,8 +135,6 @@ library(dplyr)
 library(ggplot2)
 
 ```
-
-### Data Loading & Preprocessing
 
 ```{r}
 
@@ -184,7 +182,7 @@ View(Agestat)
 
 ```
 
-### Data Exploration
+### Data Visualization
 
 #### Player Age VS Average Points Per Game
 
