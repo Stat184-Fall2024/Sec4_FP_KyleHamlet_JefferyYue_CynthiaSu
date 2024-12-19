@@ -148,3 +148,111 @@ if (correlation$p.value < 0.05) {
 }
 
 ```
+
+# Research Question 2: How Does Age Impact Individual Player Statistics?
+
+### Load Package
+
+```{r}
+
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+
+```
+
+### Data Loading & Preprocessing
+
+```{r}
+
+NBAplayers = read.csv("NBA Players 1999-2023 - Sheet1.csv")
+
+view(NBAplayers)
+
+```
+
+```{r}
+
+NBAplayers3 <- NBAplayers %>%
+  #Drop unnecessary columns
+  select(-c(1, 4, 5, 9:21, 24, 29))
+
+#Avg points per game
+Ageppg <- NBAplayers3 %>%
+  group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgppg = mean(PTS, na.rm = TRUE))
+
+#Avg Assists Per Game
+Ageast <- NBAplayers3 %>%
+  group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgast = mean(AST, na.rm = TRUE))
+
+#Avg Offensive Rebounds
+Ageorb <- NBAplayers3 %>%
+  group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgorb = mean(ORB, na.rm = TRUE))
+
+#Avg Defensive Rebounds
+Agedrb <- NBAplayers3 %>%
+  group_by(NBAplayers3[c(2)]) %>%
+  summarise(Avgdrb = mean(DRB, na.rm = TRUE))
+
+```
+
+```{r}
+
+#Agestat dataframe
+Agestat = data.frame(Ageppg,Ageast[-c(1)],
+Ageorb[-c(1)],Agedrb[-c(1)])
+
+View(Agestat)
+
+```
+
+### Data Exploration
+
+#### Player Age VS Average Points Per Game
+
+```{r}
+
+ggplot(
+  data = Agestat,
+  aes(x=Age..,y=Avgppg,fill=Age..)
+) + geom_bar(stat = "identity", width = 0.5) +
+geom_smooth(aes(group = 1), method = "lm", se = TRUE, color = "blue") +
+labs(x = "Player Age",y = "Average Points Per Game", 
+title = "Average Points Scored at Different Ages in the NBA")
+
+```
+
+##### summary of visual 1
+
+#### Player Age VS Average Assists Per Game
+
+```{r}
+
+ggplot(data = Agestat,
+       aes(x=Age..,y=Avgast,fill=Age..)
+) + geom_bar(stat = "identity", width = 0.5) + 
+geom_smooth(aes(group = 1), method = "lm", se = TRUE, color = "blue") +
+  labs(x = "Player Age", y = "Average Assists Per Game",
+       title = "Average Assists Made at Different Ages in the NBA")
+
+```
+
+##### summary of visual 2
+
+#### Player Age VS Average Rebounds Per Game
+
+```{r}
+
+ggplot(data = Agestat,
+       aes(x=Age..,y=(Avgorb+Avgdrb),fill=Age..)
+) + geom_bar(stat = "identity", width = 0.5) + 
+geom_smooth(aes(group = 1, y = (Avgorb + Avgdrb)), method = "lm", se = TRUE, color = "blue") +
+  labs(x = "Player Age", y = "Average Rebounds Per Game",
+       title = "Average Rebounds at Different Ages in the NBA")
+
+```
+
+##### summary of visual 3
