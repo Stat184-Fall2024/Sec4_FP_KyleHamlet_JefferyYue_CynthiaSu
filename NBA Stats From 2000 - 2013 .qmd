@@ -192,7 +192,6 @@ ggplot(
   data = Agestat,
   aes(x=Age..,y=Avgppg,fill=Age..)
 ) + geom_bar(stat = "identity", width = 0.5) +
-geom_smooth(aes(group = 1), method = "lm", se = TRUE, color = "blue") +
 labs(x = "Player Age",y = "Average Points Per Game", 
 title = "Average Points Scored at Different Ages in the NBA")
 
@@ -205,7 +204,6 @@ title = "Average Points Scored at Different Ages in the NBA")
 ggplot(data = Agestat,
        aes(x=Age..,y=Avgast,fill=Age..)
 ) + geom_bar(stat = "identity", width = 0.5) + 
-geom_smooth(aes(group = 1), method = "lm", se = TRUE, color = "blue") +
   labs(x = "Player Age", y = "Average Assists Per Game",
        title = "Average Assists Made at Different Ages in the NBA")
 
@@ -218,7 +216,6 @@ geom_smooth(aes(group = 1), method = "lm", se = TRUE, color = "blue") +
 ggplot(data = Agestat,
        aes(x=Age..,y=(Avgorb+Avgdrb),fill=Age..)
 ) + geom_bar(stat = "identity", width = 0.5) + 
-geom_smooth(aes(group = 1, y = (Avgorb + Avgdrb)), method = "lm", se = TRUE, color = "blue") +
   labs(x = "Player Age", y = "Average Rebounds Per Game",
        title = "Average Rebounds at Different Ages in the NBA")
 
