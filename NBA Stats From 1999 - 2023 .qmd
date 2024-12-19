@@ -50,6 +50,8 @@ ggplot(cleaned_data, aes(x = three_point_pct)) +
   theme_minimal()
 ```
 
+The distribution of 3-point percentages is right-skewed, with the majority of players concentrated between 0.2 and 0.35, and a notable cluster at 0.0 (players with no successful 3-point shots).
+
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
 #| label: fig-ftdist
 #| fig-cap: "Distribution of Free Throw Percentage"
@@ -63,6 +65,8 @@ ggplot(cleaned_data, aes(x = free_throw_pct)) +
   theme_minimal()
 
 ```
+
+The distribution of free throw percentages is left-skewed, with most players concentrated between 0.7 and 0.9, indicating a higher proficiency in free throws compared to 3-point shooting.
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
 #| label: fig-scatter
@@ -82,16 +86,6 @@ ggplot(cleaned_data, aes(x = free_throw_pct, y = three_point_pct)) +
   theme_minimal()
 
 ```
-
-[@fig-3point-dist]
-
-The distribution of 3-point percentages is right-skewed, with the majority of players concentrated between 0.2 and 0.35, and a notable cluster at 0.0 (players with no successful 3-point shots).
-
-[@fig-ftdist]
-
-The distribution of free throw percentages is left-skewed, with most players concentrated between 0.7 and 0.9, indicating a higher proficiency in free throws compared to 3-point shooting.
-
-[@fig-scatter]
 
 While the regression line shows a positive trend, the slope is quite shallow, indicating a relatively weak correlation between these two metrics.
 
@@ -197,6 +191,8 @@ title = "Average Points Scored at Different Ages in the NBA")
 
 ```
 
+This figure shows negative concavity. It also shows that even with generally negative concavity, there was a spike in average points per game for the ages: 18, 39, 40, 42, and 44.
+
 #### Player Age VS Average Assists Per Game
 
 ```{r}
@@ -210,6 +206,8 @@ ggplot(data = Agestat,
 
 ```
 
+This figure has a more aggressive negative concave to it. Like previously we see that at age 39 and 44 there is a large spike in average assists per game.
+
 #### Player Age VS Average Rebounds Per Game
 
 ```{r}
@@ -222,16 +220,6 @@ ggplot(data = Agestat,
        title = "Average Rebounds at Different Ages in the NBA")
 
 ```
-
-[@fig-pl-ppg]
-
-This figure shows negative concavity. It also shows that even with generally negative concavity, there was a spike in average points per game for the ages: 18, 39, 40, 42, and 44.
-
-[@fig-pl-ast]
-
-This figure has a more aggressive negative concave to it. Like previously we see that at age 39 and 44 there is a large spike in average assists per game.
-
-[@fig-pl-rpg]
 
 This figure like the others has negative concavity as well. Also like the previous figures there is a spike in average rebounds per game for the ages: 42 and 44.
 
