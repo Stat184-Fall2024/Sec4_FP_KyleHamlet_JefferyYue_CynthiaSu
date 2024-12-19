@@ -271,6 +271,8 @@ ggplot(
                           formula = y ~ x)
 ```
 
+Most of the data in the plot is clustered in the middle indicating some correlation exists. There are few outliers. The regression line shows a positive slope. Teams with higher average points scored tend to win more.
+
 ### Win Rate Vs Defense(Points Allowed)
 
 ```{r}
@@ -285,6 +287,8 @@ ggplot(
   theme_bw() + stat_smooth(method = "lm",
                            formula = y ~ x)
 ```
+
+Again most of the data is clustered in the center of the graph indicating a correlation exists. There are more outliers in this graph. The regression line shows a negative slope. Teams with higher average points allowed tend to win less.
 
 ### Result Analysis
 
@@ -489,3 +493,8 @@ if (correlation$p.value < 0.05) {
 }
 
 ```
+*NBA and ABA league index*. Basketball. (n.d.). https://www.basketball-reference.com/leagues/NBA_2000_per_game.html
+
+NBA. (n.d.). *All Time Leaders \| Stats \| NBA.com*. Www.nba.com. https://www.nba.com/stats/alltime
+
+‌
