@@ -4,37 +4,130 @@ format: pdf
 editor: visual
 ---
 
-## Research Question 1: Is a player’s 3-point shooting percentage related to free throw shooting percentage?
+# Research Question 1: Is a player’s 3-point shooting percentage related to free throw shooting percentage?
 
-## Load Package
+This research examines the relationship between 3-point shooting and free-throw shooting. Understanding this correlation may provide insights into how shooting mechanics or player training affect performance in these distinct areas.
 
-```{r}
+### Data
+
+We get the NBA player statistics from 1999 to 2023 from the NBA website. The data was collected by NBA analysts.
+
+The data meets the FAIR principles:
+
+-   Findable: The dataset has clear identifiers and structured attributes.
+
+-   Accessible: The dataset is standard tabular data, which can be saved as CSV file.
+
+-   Interoperable: Data column names and values align with standard basketball statistical terminology.
+
+-   Reusable: The dataset has vary variables from multiple years, and it's convinient to do different analyses.
+
+Our research research about the correlation between the 3-point goal percentage (3P%) and free throw goal percentage (FT%). These two attributes are part of dataset.
+
+### Data Visualization
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+library(ggplot2)
+
+player_data <- read.csv("NBA Players 1999-2023 - Sheet1.csv")
+cleaned_data <- player_data %>%
+  select(`Player`,`X3P.`, `FT.`) %>%
+  rename(player_name = `Player`,three_point_pct = `X3P.`, free_throw_pct = `FT.`) %>%
+  drop_na()
+```
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+#| label: fig-3point-dist
+#| fig-cap: "Distribution of 3-Point Percentage"
+#| echo: false
+#| warning: false
+#| message: false
+
+ggplot(cleaned_data, aes(x = three_point_pct)) +
+  geom_histogram(binwidth = 0.05, fill = "blue", color = "black") +
+  labs(x = "3-Point Percentage", y = "Frequency") +
+  theme_minimal()
+```
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+#| label: fig-ftdist
+#| fig-cap: "Distribution of Free Throw Percentage"
+#| echo: false
+#| warning: false
+#| message: false
+
+ggplot(cleaned_data, aes(x = free_throw_pct)) +
+  geom_histogram(binwidth = 0.05, fill = "green", color = "black") +
+  labs(x = "Free Throw Percentage", y = "Frequency") +
+  theme_minimal()
+
+```
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+#| label: fig-scatter
+#| fig-cap: "Scatter Plot of 3-Point Percentage vs Free Throw Percentage"
+#| echo: false
+#| warning: false
+#| message: false
+
+ggplot(cleaned_data, aes(x = free_throw_pct, y = three_point_pct)) +
+  geom_point(color = "blue",alpha=0.5) + 
+  geom_smooth(method = "lm", se = FALSE, color = "black") +  
+  labs(
+    title = "Scatter Plot of 3-Point Percentage vs Free Throw Percentage",
+    x = "Free Throw Percentage",
+    y = "3-Point Percentage"
+  ) +
+  theme_minimal()
+
+```
+
+[@fig-3point-dist]
+
+The distribution of 3-point percentages is right-skewed, with the majority of players concentrated between 0.2 and 0.35, and a notable cluster at 0.0 (players with no successful 3-point shots).
+
+[@fig-ftdist]
+
+The distribution of free throw percentages is left-skewed, with most players concentrated between 0.7 and 0.9, indicating a higher proficiency in free throws compared to 3-point shooting.
+
+[@fig-scatter]
+
+While the regression line shows a positive trend, the slope is quite shallow, indicating a relatively weak correlation between these two metrics.
+
+### Result Analysis
+
+We did Pearsonr correlation test between 3-point percentage and free throw percentage, and got the following result:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+#| label: correlation-test
+#| echo: false
+#| warning: false
+#| message: false
+
+correlation <- cor.test(cleaned_data$three_point_pct, cleaned_data$free_throw_pct, method = "pearson")
+
+correlation_result <- paste0(
+  "Pearson correlation coefficient: r = ", round(correlation$estimate, 2),
+  ", p-value = ", signif(correlation$p.value, 3)
+)
+
+correlation_result
+```
+
+The Pearson correlation test between 3-point percentage and free throw percentage shows a correlation coefficient of 0.26 and a p-value of 4.22e-156. This indicates a weak positive correlation between the two variables. While the correlation is not strong, the extremely small p-value suggests that the relationship is statistically significant and not due to random chance. In practical terms, this means that players who perform better at free throws tend to have slightly better 3-point shooting percentages, but the connection between the two skills is limited. This result highlights that while both skills involve shooting mechanics, they are likely influenced by different factors such as shot distance, player roles, and situational conditions during games.
+
+### Appendix
+
+```{r, codeAppend,ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
 
 library(tidyverse)
-
-```
-
-## Data Loading & Preprocessing
-
-```{r}
 player_data <- read.csv("NBA Players 1999-2023 - Sheet1.csv")
-
-player_data
-```
-
-```{r}
-
 cleaned_data <- player_data %>%
   select(`Player`,`X3P.`, `FT.`) %>%
   rename(player_name = `Player`,three_point_pct = `X3P.`, free_throw_pct = `FT.`) %>%
   drop_na()
 
-cleaned_data
-```
-
-## Data Exploration
-
-```{r}
 ggplot(cleaned_data, aes(x = free_throw_pct, y = three_point_pct)) +
   geom_point(alpha = 0.7) +
   labs(
@@ -43,18 +136,11 @@ ggplot(cleaned_data, aes(x = free_throw_pct, y = three_point_pct)) +
     y = "3-Point Percentage"
   ) +
   theme_minimal()
-```
 
-## Correlation Test
 
-```{r}
 correlation <- cor.test(cleaned_data$three_point_pct, cleaned_data$free_throw_pct, method = "pearson")
 
-correlation
 
-```
-
-```{r}
 if (correlation$p.value < 0.05) {
   cat("Found significant correlation between 3-point shooting percentage and free throw shooting percentage (r =", round(correlation$estimate, 2), ").")
 } else {
