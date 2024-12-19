@@ -119,9 +119,9 @@ This research question examines the correlation between a player's age and their
 
 Similarly to the first research question the data was taken from NBA player statistics from 1999 to 2023 from the NBA website. As stated above, the data meets the FAIR principles.
 
-### Data Loading & Processioning
+### Data Visualization
 
-```{r}
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 
 library(tidyverse)
 library(dplyr)
@@ -129,13 +129,13 @@ library(ggplot2)
 
 ```
 
-```{r}
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 
 NBAplayers = read.csv("NBA Players 1999-2023 - Sheet1.csv")
 
 ```
 
-```{r}
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 
 NBAplayers3 <- NBAplayers %>%
   #Drop unnecessary columns
@@ -163,7 +163,7 @@ Agedrb <- NBAplayers3 %>%
 
 ```
 
-```{r}
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 
 #Agestat dataframe
 Agestat = data.frame(Ageppg,Ageast[-c(1)],
@@ -171,13 +171,9 @@ Ageorb[-c(1)],Agedrb[-c(1)])
 
 ```
 
-### Data Visualization
-
 #### Player Age VS Average Points Per Game
 
-```{r}
-#| label: fig-pl-ppg
-
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 ggplot(
   data = Agestat,
   aes(x=Age..,y=Avgppg,fill=Age..)
@@ -191,9 +187,7 @@ This figure shows negative concavity. It also shows that even with generally neg
 
 #### Player Age VS Average Assists Per Game
 
-```{r}
-#| label: fig-pl-ast
-
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 ggplot(data = Agestat,
        aes(x=Age..,y=Avgast,fill=Age..)
 ) + geom_bar(stat = "identity", width = 0.5) + 
@@ -206,9 +200,7 @@ This figure has a more aggressive negative concave to it. Like previously we see
 
 #### Player Age VS Average Rebounds Per Game
 
-```{r}
-#| label: fig-pl-rpg
-
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 ggplot(data = Agestat,
        aes(x=Age..,y=(Avgorb+Avgdrb),fill=Age..)
 ) + geom_bar(stat = "identity", width = 0.5) + 
@@ -233,8 +225,7 @@ The data for this research question was found on basketball-reference.com, which
 
 ### Data Visualizations
 
-```{r}
-
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 #Load libraries
 library(tidyverse)
 library(dplyr)
@@ -254,7 +245,7 @@ View(WinRateComp)
 
 ### Win Rate Vs Offense(Points Scored)
 
-```{r}
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 ggplot(
   data = WinRateComp,
   aes(x=as.numeric(unlist(WinRateComp[3])),y=as.numeric(unlist(WinRateComp[2])))
@@ -271,7 +262,7 @@ Most of the data in the plot is clustered in the middle indicating some correlat
 
 ### Win Rate Vs Defense(Points Allowed)
 
-```{r}
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 ggplot(
   data = WinRateComp,
   aes(x=as.numeric(unlist(WinRateComp[4])),y=as.numeric(unlist(WinRateComp[2])))
@@ -290,7 +281,7 @@ Again most of the data is clustered in the center of the graph indicating a corr
 
 The graphics and correlation tests indicate that there is a moderately strong positive correlation between the number of points that a NBA team and a moderately strong negative correlation between the number of points a NBA team allows. The absolute values of the correlations are relatively close(0.54 for points scored and -0.48 for points allowed), but it appears scoring points is more important to a team winning than preventing the other team from scoring. Thus, offense has a stronger correlation with winning that defense in the NBA.
 
-```{r}
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 #Signficance test for win rate and offense 
 correlation2 <- cor.test(WinRateComp$W..,WinRateComp$ORtg , method = "pearson")
 
@@ -300,7 +291,7 @@ correlation2_result <- paste0(
 )
 ```
 
-```{r}
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 #Signficance test for win rate and defense
 correlation3 <- cor.test(WinRateComp$W..,WinRateComp$DRtg , method = "pearson")
 
@@ -489,6 +480,8 @@ if (correlation$p.value < 0.05) {
 }
 
 ```
+
+# References
 
 *NBA and ABA league index*. Basketball. (n.d.). https://www.basketball-reference.com/leagues/NBA_2000_per_game.html
 
