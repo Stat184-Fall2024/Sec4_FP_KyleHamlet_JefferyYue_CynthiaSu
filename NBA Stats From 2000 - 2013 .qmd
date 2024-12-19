@@ -151,6 +151,12 @@ if (correlation$p.value < 0.05) {
 
 # Research Question 2: How Does Age Impact Individual Player Statistics?
 
+This research question examines the correlation between a player's age and their individual player statistics.
+
+## Data
+
+Similarly to the first research question the data was taken from NBA player statistics from 1999 to 2023 from the NBA website. As stated above, the data meets the FAIR principles.
+
 ### Load Package
 
 ```{r}
@@ -225,7 +231,7 @@ title = "Average Points Scored at Different Ages in the NBA")
 
 ```
 
-##### summary of visual 1
+
 
 #### Player Age VS Average Assists Per Game
 
@@ -240,7 +246,7 @@ geom_smooth(aes(group = 1), method = "lm", se = TRUE, color = "blue") +
 
 ```
 
-##### summary of visual 2
+
 
 #### Player Age VS Average Rebounds Per Game
 
@@ -255,4 +261,3 @@ geom_smooth(aes(group = 1, y = (Avgorb + Avgdrb)), method = "lm", se = TRUE, col
 
 ```
 
-##### summary of visual 3
