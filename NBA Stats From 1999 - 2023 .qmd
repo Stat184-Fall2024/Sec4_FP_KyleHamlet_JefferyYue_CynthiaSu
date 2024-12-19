@@ -133,8 +133,6 @@ library(ggplot2)
 
 NBAplayers = read.csv("NBA Players 1999-2023 - Sheet1.csv")
 
-view(NBAplayers)
-
 ```
 
 ```{r}
