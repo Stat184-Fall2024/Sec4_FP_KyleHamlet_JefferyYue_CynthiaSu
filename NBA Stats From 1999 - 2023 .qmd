@@ -300,6 +300,8 @@ ggplot(
 
 ### Result Analysis
 
+The graphics and correlation tests indicate that there is a moderately strong positive correlation between the number of points that a NBA team and a moderately strong negative correlation between the number of points a NBA team allows. The absolute values of the correlations are relatively close(0.54 for points scored and -0.48 for points allowed), but it appears scoring points is more important to a team winning than preventing the other team from scoring. Thus, offense has a stronger correlation with winning that defense in the NBA.
+
 ```{r}
 #Signficance test for win rate and offense 
 correlation2 <- cor.test(WinRateComp$W..,WinRateComp$ORtg , method = "pearson")
