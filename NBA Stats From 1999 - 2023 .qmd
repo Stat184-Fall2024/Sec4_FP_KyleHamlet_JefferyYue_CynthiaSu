@@ -187,7 +187,7 @@ title = "Average Points Scored at Different Ages in the NBA")
 
 ```
 
-This figure shows negative concavity. It also shows that even with generally negative concavity, there was a spike in average points per game for the ages: 18, 39, 40, 42, and 44.
+This figure shows negative concavity. It also shows that even with generally negative concavity, there was a spike in average points per game for the age 44.
 
 #### Player Age VS Average Assists Per Game
 
@@ -202,7 +202,7 @@ ggplot(data = Agestat,
 
 ```
 
-This figure has a more aggressive negative concave to it. Like previously we see that at age 39 and 44 there is a large spike in average assists per game.
+This figure has a more aggressive negative concave to it. Like previously we see that at age 44 there is a large spike in average assists per game.
 
 #### Player Age VS Average Rebounds Per Game
 
@@ -217,7 +217,7 @@ ggplot(data = Agestat,
 
 ```
 
-This figure like the others has negative concavity as well. Also like the previous figures there is a spike in average rebounds per game for the ages: 42 and 44.
+This figure like the others has negative concavity as well.
 
 ### Result Analysis
 
