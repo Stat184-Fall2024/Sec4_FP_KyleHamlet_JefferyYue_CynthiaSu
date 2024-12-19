@@ -1,5 +1,5 @@
 ---
-title: "NBA Stats From 2000 - 2023"
+title: "NBA Stats From 1999 - 2023"
 format: pdf
 editor: visual
 ---
@@ -14,15 +14,15 @@ We get the NBA player statistics from 1999 to 2023 from the NBA website. The dat
 
 The data meets the FAIR principles:
 
--   Findable: The dataset has clear identifiers and structured attributes.
+-   Find able: The data set has clear identifiers and structured attributes.
 
--   Accessible: The dataset is standard tabular data, which can be saved as CSV file.
+-   Accessible: The data set is standard tabular data, which can be saved as CSV file.
 
--   Interoperable: Data column names and values align with standard basketball statistical terminology.
+-   Inter operable: Data column names and values align with standard basketball statistical terminology.
 
--   Reusable: The dataset has vary variables from multiple years, and it's convinient to do different analyses.
+-   Reusable: The data set has vary variables from multiple years, and it's convenient to do different analyses.
 
-We will be researching about the correlation between the 3-point goal percentage (3P%) and free throw goal percentage (FT%). These two attributes are part of dataset.
+We will be researching about the correlation between the 3-point goal percentage (3P%) and free throw goal percentage (FT%). These two attributes are part of data set.
 
 ### Data Visualization
 
@@ -97,7 +97,7 @@ While the regression line shows a positive trend, the slope is quite shallow, in
 
 ### Result Analysis
 
-We did Pearsonr correlation test between 3-point percentage and free throw percentage, and got the following result:
+We did Pearson correlation test between 3-point percentage and free throw percentage, and got the following result:
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
 #| label: correlation-test
@@ -117,7 +117,6 @@ correlation_result
 
 The Pearson correlation test between 3-point percentage and free throw percentage shows a correlation coefficient of 0.26 and a p-value of 4.22e-156. This indicates a weak positive correlation between the two variables. While the correlation is not strong, the extremely small p-value suggests that the relationship is statistically significant and not due to random chance. In practical terms, this means that players who perform better at free throws tend to have slightly better 3-point shooting percentages, but the connection between the two skills is limited. This result highlights that while both skills involve shooting mechanics, they are likely influenced by different factors such as shot distance, player roles, and situational conditions during games.
 
-
 # Research Question 2: How Does Age Impact Individual Player Statistics?
 
 This research question examines the correlation between a player's age and their individual player statistics.
@@ -126,7 +125,7 @@ This research question examines the correlation between a player's age and their
 
 Similarly to the first research question the data was taken from NBA player statistics from 1999 to 2023 from the NBA website. As stated above, the data meets the FAIR principles.
 
-### Data Loading & Preprocessing
+### Data Loading & Processioning
 
 ```{r}
 
@@ -230,7 +229,7 @@ This figure shows negative concavity. It also shows that even with generally neg
 
 [@fig-pl-ast]
 
-This figure has a more aggresive negative concave to it. Like previously we see that at age 39 and 44 there is a large spike in average assists per game.
+This figure has a more aggressive negative concave to it. Like previously we see that at age 39 and 44 there is a large spike in average assists per game.
 
 [@fig-pl-rpg]
 
@@ -238,12 +237,88 @@ This figure like the others has negative concavity as well. Also like the previo
 
 ### Result Analysis
 
-From looking at the above visuals we can conclude that generally speaking players in their mid 20's to mid 30's perform the best in all 3 aspects. We can see there are some outliers amongst all 3 visuals occuring at the age 39 and higher. Due to the negative concavity, we can conclude that the general body of players start out with lower stats, progress to peak throughout the middle of their career, then decrease in performance as they are about to retire.
+From looking at the above visuals we can conclude that generally speaking players in their mid 20's to mid 30's perform the best in all 3 aspects. We can see there are some outliers among all 3 visuals occurring at the age 39 and higher. Due to the negative concavity, we can conclude that the general body of players start out with lower stats, progress to peak throughout the middle of their career, then decrease in performance as they are about to retire.
+
+# Research Question 3: Are offensive or defensive statistics more important to a team's success?
+
+This research question is intended to search for correlation between a team's win rate and their offensive or defensive statistics to find out whether offense or defense is more important to a team's success.
+
+### Data
+
+The data for this research question was found on basketball-reference.com, which is a site that records and maintains data from the NBA. The subset of data used is advanced team statistics from 1999-2023. A team's win rate in a particular season is calculated by their wins divided by total games played. The offense rating of a team is recorded on the website as the average number of points a team scores per 100 possessions while the defense rating of a team is recorded as the average number of points the team concedes per 100 possessions.
+
+### Data Visualizations
+
+```{r}
+
+#Load libraries
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+
+#Read csv
+NBAteamsA = read.csv("NBA Teams ADvanced 1999-2023 - Sheet1.csv")
+View(NBAteamsA)
+
+#Create WinRate comparison data frame
+WinRate = (NBAteamsA[4]/(NBAteamsA[5]+NBAteamsA[4]))
+WinRateComp = data.frame(NBAteamsA[2],WinRate,NBAteamsA[6],NBAteamsA[7],NBAteamsA[16])
+View(WinRateComp)
 
 
+```
 
+### Win Rate Vs Offense(Points Scored)
 
+```{r}
+ggplot(
+  data = WinRateComp,
+  aes(x=as.numeric(unlist(WinRateComp[3])),y=as.numeric(unlist(WinRateComp[2])))
+) +
+  geom_point() + 
+  labs(x = "Points Scored(Per 100 Possessions)",
+       y = "Win Rate",
+       title = "Correlation Between Win Rate and Points Scored")+
+ theme_bw() + stat_smooth(method = "lm",
+                          formula = y ~ x)
+```
 
+### Win Rate Vs Defense(Points Allowed)
+
+```{r}
+ggplot(
+  data = WinRateComp,
+  aes(x=as.numeric(unlist(WinRateComp[4])),y=as.numeric(unlist(WinRateComp[2])))
+) +
+  geom_point() + 
+  labs(x = "Points Allowed(Per 100 Possessions)",
+       y = "Win Rate",
+       title = "Correlation Between Win Rate and Points Allowed")+
+  theme_bw() + stat_smooth(method = "lm",
+                           formula = y ~ x)
+```
+
+### Result Analysis
+
+```{r}
+#Signficance test for win rate and offense 
+correlation2 <- cor.test(WinRateComp$W..,WinRateComp$ORtg , method = "pearson")
+
+correlation2_result <- paste0(
+  "Pearson correlation coefficient: r = ", round(correlation2$estimate, 2),
+  ", p-value = ", signif(correlation2$p.value, 3)
+)
+```
+
+```{r}
+#Signficance test for win rate and defense
+correlation3 <- cor.test(WinRateComp$W..,WinRateComp$DRtg , method = "pearson")
+
+correlation3_result <- paste0(
+  "Pearson correlation coefficient: r = ", round(correlation3$estimate, 2),
+  ", p-value = ", signif(correlation3$p.value, 3)
+)
+```
 
 ### Appendix
 
@@ -424,6 +499,3 @@ if (correlation$p.value < 0.05) {
 }
 
 ```
-
-
-
